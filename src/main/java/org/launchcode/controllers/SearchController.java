@@ -23,5 +23,23 @@ public class SearchController {
     }
 
     // TODO #1 - Create handler to process search request and display results
+    // After looking up the search results via the JobData class, you'll need to
+    // pass them into the search.html view via the model. You'll also need to pass
+    // ListController.columnChoices to the view, as the existing search handler does
+    @RequestMapping(value = "/search/results", method = RequestMethod.POST)
+    public String search(@RequestParam HashMap searchType, @RequestParam String searchTerm) {
+
+        if (columnChoices = 'all') {
+
+            for (HashMap<String, String> row : allJobs) {
+                String aValue = row.get(field);
+
+            JobData.findAll();
+        }
+
+
+        model.addAttribute("columns", ListController.columnChoices);
+        return "search";
+    }
 
 }
