@@ -1,14 +1,16 @@
 package org.launchcode.controllers;
 
-import org.launchcode.models.JobData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+
+import static org.launchcode.models.JobData.allJobs;
+import static org.launchcode.models.JobData.loadData;
 
 /**
  * Created by LaunchCode
@@ -29,7 +31,7 @@ public class SearchController {
     // ListController.columnChoices to the view, as the existing search handler does
 
     @RequestMapping(value = "/search/results", method = RequestMethod.GET)
-    public String search(@RequestParam HashMap searchType, @RequestParam String searchTerm) {
+    public ArrayList<HashMap<String, String>> search(Model model, @RequestParam HashMap searchType, @RequestParam String searchTerm) {
 
         // load data, if not already loaded
         loadData();
