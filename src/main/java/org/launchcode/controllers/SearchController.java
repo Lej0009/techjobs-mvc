@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by LaunchCode
@@ -26,20 +27,35 @@ public class SearchController {
     // After looking up the search results via the JobData class, you'll need to
     // pass them into the search.html view via the model. You'll also need to pass
     // ListController.columnChoices to the view, as the existing search handler does
-    @RequestMapping(value = "/search/results", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/search/results", method = RequestMethod.GET)
     public String search(@RequestParam HashMap searchType, @RequestParam String searchTerm) {
 
-        if (columnChoices = 'all') {
+        // load data, if not already loaded
+        loadData();
 
-            for (HashMap<String, String> row : allJobs) {
-                String aValue = row.get(field);
+        ArrayList<HashMap<String, String>> someJobs = new ArrayList<>();
 
-            JobData.findAll();
+        for (HashMap<String, String> row : allJobs) {
+
+            for (String key : row.keySet()) {
+                String kValue = row.get(key);
+
+                if (kValue.toLowerCase().contains(searchTerm.toLowerCase())) {
+                    someJobs.add(row);
+                }
+            }
+
+            for (String value : row.values()) {
+                String vValue = row.get(value);
+
+                if (vValue.toLowerCase().contains(searchTerm.toLowerCase())) {
+                    someJobs.add(row);
+                }
+            }
         }
-
-
         model.addAttribute("columns", ListController.columnChoices);
-        return "search";
+        return someJobs;
     }
-
 }
+
