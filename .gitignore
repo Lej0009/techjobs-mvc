@@ -11,7 +11,7 @@
 .springBeans
 
 ### IntelliJ IDEA ###
-.idea
+../../IdeaProjects/.idea
 *.iws
 *.iml
 *.ipr
