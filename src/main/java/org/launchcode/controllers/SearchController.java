@@ -38,16 +38,16 @@ public class SearchController extends TechJobsController {
         // load data, if not already loaded
 //        loadData();
 
-        ArrayList<HashMap<String, String>> searchResults;
+        ArrayList<HashMap<String, String>> someJobs;
 
         if (searchType.equals("all")) {
-            searchResults = JobData.findByValue(searchTerm);
+            someJobs = JobData.findByValue(searchTerm);
         }
         else {
-            searchResults = JobData.findByColumnAndValue(searchType, searchTerm);
+            someJobs = JobData.findByColumnAndValue(searchType, searchTerm);
         }
         model.addAttribute("columns", ListController.columnChoices);
-        model.addAttribute("someJobs", searchResults);
+        model.addAttribute("someJobs", someJobs);
         model.addAttribute("searchType", searchType);
         return "search";
 
