@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Created by LaunchCode
@@ -59,7 +60,7 @@ public class JobData {
         return new ArrayList<>(allJobs);
     }
 
-    /**
+    /*
      * Returns results of search the jobs data by key/value, using
      * inclusion of the search term.
      *
@@ -81,7 +82,7 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue != null && aValue.toLowerCase().contains(value.toLowerCase())) {
+            if (Pattern.compile(Pattern.quote(value), Pattern.CASE_INSENSITIVE).matcher(aValue).find()) {
                 jobs.add(row);
             }
         }
@@ -107,7 +108,7 @@ public class JobData {
             for (String key : row.keySet()) {
                 String aValue = row.get(key);
 
-                if (aValue.toLowerCase().contains(value.toLowerCase())) {
+                if (Pattern.compile(Pattern.quote(value), Pattern.CASE_INSENSITIVE).matcher(aValue).find()) {
                     jobs.add(row);
 
                     // Finding one field in a job that matches is sufficient
